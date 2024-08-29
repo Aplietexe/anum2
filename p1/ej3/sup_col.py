@@ -33,7 +33,7 @@ def sol_trsupcol_rec(A: Arr, b: Arr) -> Arr:
 def sol_trsupcol(A: Arr, b: Arr) -> Arr:
     """
     Solves Ax = b, where A is an upper triangular invertible matrix.
-    Does not overwrite A or b.
+    Overwrites b with x, does not overwrite A.
     """
     n = A.shape[0]
 
@@ -44,11 +44,14 @@ def sol_trsupcol(A: Arr, b: Arr) -> Arr:
     if np.any(np.isclose(np.diagonal(A), 0)):
         raise ValueError("Matrix is not invertible")
 
-    x = b.copy()
+    i = n - 1
+    while np.isclose(b[i], 0) and i >= 0:
+        b[i] = 0
+        i -= 1
     for i in range(n - 1, -1, -1):
-        x[i] /= A[i, i]
-        x[:i] -= A[:i, i] * x[i]
-    return x
+        b[i] /= A[i, i]
+        b[:i] -= A[:i, i] * b[i]
+    return b
 
 
 if __name__ == "__main__":

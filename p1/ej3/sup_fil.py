@@ -8,7 +8,7 @@ Arr = NDArray[np.float64]
 def sol_trsupfil(A: Arr, b: Arr) -> Arr:
     """
     Solves Ax = b, where A is an upper triangular invertible matrix.
-    Does not overwrite A or b.
+    Overwrites b with x, does not overwrite A.
     """
     n = A.shape[0]
 
@@ -19,10 +19,14 @@ def sol_trsupfil(A: Arr, b: Arr) -> Arr:
     if np.any(np.isclose(np.diagonal(A), 0)):
         raise ValueError("Matrix is not invertible")
 
-    x = np.zeros(n)
-    for i in range(n - 1, -1, -1):
-        x[i] = (b[i] - x[i + 1 :] @ A[i, i + 1 :]) / A[i, i]
-    return x
+    i = n - 1
+    while np.isclose(b[i], 0) and i >= 0:
+        b[i] = 0
+        i -= 1
+    for i in range(i, -1, -1):
+        b[i] -= b[i + 1 :] @ A[i, i + 1 :]
+        b[i] /= A[i, i]
+    return b
 
 
 if __name__ == "__main__":
