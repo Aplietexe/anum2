@@ -1,3 +1,13 @@
 {
-    "cSpell.words": ["MAXA", "MAXN", "rtol", "tril", "trinffil", "triu"]
+    "cSpell.words": [
+        "MAXA",
+        "MAXN",
+        "rtol",
+        "tril",
+        "trinfcol",
+        "trinffil",
+        "triu",
+        "trsupcol",
+        "trsupfil"
+    ]
 }

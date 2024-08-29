@@ -5,7 +5,7 @@ from tests import test_sup_solve
 Arr = NDArray[np.float64]
 
 
-def sol_trsupcol(A: Arr, b: Arr) -> Arr:
+def sol_trsupcol_rec(A: Arr, b: Arr) -> Arr:
     """
     Solves Ax = b, where A is an upper triangular invertible matrix."
     Uses recursion, therefore it is slower than an iterative algorithm.
@@ -31,5 +31,5 @@ def sol_trsupcol(A: Arr, b: Arr) -> Arr:
 
 
 if __name__ == "__main__":
-    t = test_sup_solve(sol_trsupcol)
+    t = test_sup_solve(sol_trsupcol_rec)
     print(t)
