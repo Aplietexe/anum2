@@ -30,6 +30,29 @@ def sol_trinfcol_rec(A: Arr, b: Arr) -> Arr:
     return rec(A, b)
 
 
+def sol_trinfcol(A: Arr, b: Arr) -> Arr:
+    """
+    Solves Ax = b, where A is a lower triangular invertible matrix.
+    Does not overwrite A or b.
+    """
+    n = A.shape[0]
+
+    if A.shape != (n, n) or b.shape != (n,):
+        raise ValueError("Invalid shapes")
+    if not np.allclose(A, np.tril(A)):
+        raise ValueError("Matrix is not lower triangular")
+    if np.any(np.isclose(np.diagonal(A), 0)):
+        raise ValueError("Matrix is not invertible")
+
+    x = b.copy()
+    for i in range(n):
+        x[i] /= A[i, i]
+        x[i + 1 :] -= A[i + 1 :, i] * x[i]
+    return x
+
+
 if __name__ == "__main__":
     t = test_inf_solve(sol_trinfcol_rec)
+    print(t)
+    t = test_inf_solve(sol_trinfcol)
     print(t)
