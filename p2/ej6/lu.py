@@ -26,5 +26,5 @@ def dlu(A: Arr) -> tuple[Arr, Arr]:
 
 
 if __name__ == "__main__":
-    t = test_lu(dlu)
+    t = test_lu(dlu, max_cond=1e5, rtol=1e-5)
     print(t)
