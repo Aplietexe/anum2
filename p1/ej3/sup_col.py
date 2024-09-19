@@ -1,6 +1,5 @@
 import numpy as np
 from numpy.typing import NDArray
-from tests import test_sup_solve
 
 Arr = NDArray[np.float64]
 
@@ -55,6 +54,8 @@ def sol_trsupcol(A: Arr, b: Arr) -> Arr:
 
 
 if __name__ == "__main__":
+    from .tests import test_sup_solve
+
     t = test_sup_solve(sol_trsupcol_rec)
     print(t)
     t = test_sup_solve(sol_trsupcol)

@@ -1,6 +1,5 @@
 import numpy as np
 from numpy.typing import NDArray
-from tests import test_inf_solve
 
 Arr = NDArray[np.float64]
 
@@ -30,5 +29,7 @@ def sol_trinffil(A: Arr, b: Arr) -> Arr:
 
 
 if __name__ == "__main__":
+    from .tests import test_inf_solve
+
     t = test_inf_solve(sol_trinffil)
     print(t)
