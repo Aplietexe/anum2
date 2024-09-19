@@ -3,7 +3,7 @@ from numpy.typing import NDArray
 
 from ..ej3.inf_fil import sol_trinffil
 from ..ej3.sup_fil import sol_trsupfil
-from .cholesky import cholesky
+from ..ej12.cholesky import cholesky
 from .tests import test_posdef_solve
 
 Arr = NDArray[np.float64]
