@@ -1,16 +1,15 @@
 import numpy as np
 from numpy.typing import NDArray
 
-from .tests import test_lu
-
 Arr = NDArray[np.float64]
 
 
-def dlu(A: Arr) -> tuple[Arr, Arr]:
+def lu(A: Arr) -> tuple[Arr, Arr]:
     """
     Performs LU decomposition without pivoting on A.
     Overwrites A with U upper triangular and L lower triangular.
     Returns L and U.
+    O(2n^3/3) complexity.
     """
     n = A.shape[0]
     if A.shape != (n, n):
@@ -26,5 +25,7 @@ def dlu(A: Arr) -> tuple[Arr, Arr]:
 
 
 if __name__ == "__main__":
-    t = test_lu(dlu, max_cond=1e5, rtol=1e-5)
+    from tests.factorizations.lu import test_lu
+
+    t = test_lu(lu, max_cond=1e5, rtol=1e-5)
     print(t)
