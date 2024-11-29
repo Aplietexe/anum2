@@ -1,16 +1,15 @@
 import numpy as np
 from numpy.typing import NDArray
 
-from ..ej6.tests import test_lu
-
 Arr = NDArray[np.float64]
 
 
-def dlup(A: Arr) -> tuple[Arr, Arr, Arr]:
+def lu(A: Arr) -> tuple[Arr, Arr, Arr]:
     """
     Performs LU decomposition with partial pivoting on A.
     Overwrites A with U upper triangular and L lower triangular.
     Returns L, U and P such that PA=LU.
+    O(2n^3/3) complexity.
     """
     n = A.shape[0]
     if A.shape != (n, n):
@@ -19,9 +18,10 @@ def dlup(A: Arr) -> tuple[Arr, Arr, Arr]:
     P = np.eye(n)
     for i in range(n - 1):
         pivot = np.argmax(np.abs(A[i:, i])) + i
-        if not np.isclose(A[pivot, i], 0):
-            A[[i, pivot]] = A[[pivot, i]]
-            P[[i, pivot]] = P[[pivot, i]]
+        if np.isclose(A[pivot, i], 0):
+            continue
+        A[[i, pivot]] = A[[pivot, i]]
+        P[[i, pivot]] = P[[pivot, i]]
         A[i + 1 :, i] /= A[i, i]
         A[i + 1 :, i + 1 :] -= np.outer(A[i + 1 :, i], A[i, i + 1 :])
 
@@ -29,5 +29,7 @@ def dlup(A: Arr) -> tuple[Arr, Arr, Arr]:
 
 
 if __name__ == "__main__":
-    t = test_lu(dlup)
+    from tests.factorizations.lu import test_lu
+
+    t = test_lu(lu)
     print(t)
