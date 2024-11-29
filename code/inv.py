@@ -15,7 +15,7 @@ def inv(A: Arr) -> Arr | None:
     Returns None if A is not invertible.
     """
     n = A.shape[0]
-    L, U, P = lu(A)
+    L, U, P, _ = lu(A)
     if np.isclose(np.prod(np.diag(U)), 0):
         return None
 

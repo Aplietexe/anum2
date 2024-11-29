@@ -8,7 +8,7 @@ Arr = NDArray[np.float64]
 
 
 def test_lu(
-    dlu: Callable[[Arr], tuple[Arr, Arr]] | Callable[[Arr], tuple[Arr, Arr, Arr]],
+    dlu: Callable[[Arr], tuple[Arr, Arr]] | Callable[[Arr], tuple[Arr, Arr, Arr, int]],
     maxn: int = 70,
     maxa: float = 1e6,
     max_cond: float = 1e7,
@@ -31,8 +31,10 @@ def test_lu(
         t += time.perf_counter()
         L = res[0]
         U = res[1]
-        if len(res) == 3:
-            A = res[2] @ A
+        if len(res) == 4:
+            P = res[2]
+            assert res[3] == np.linalg.det(P)
+            A = P @ A
         np.testing.assert_allclose(L @ U, A, rtol=rtol)
         c += 1
 
