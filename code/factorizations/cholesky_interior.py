@@ -9,6 +9,7 @@ def cholesky(A: Arr) -> Arr | None:
     Given a symmetric matrix A, computes its Cholesky factor if it exists.
     Overwrites the upper triangular part of A with the Cholesky factor and returns it.
     Returns None if A is not positive definite.
+    O(n^3/3) complexity.
     """
     n = A.shape[0]
 
@@ -27,7 +28,7 @@ def cholesky(A: Arr) -> Arr | None:
 
 
 if __name__ == "__main__":
-    from .tests import test_cholesky
+    from tests.factorizations.cholesky import test_cholesky
 
     t = test_cholesky(cholesky)
     print(t)
