@@ -1,16 +1,16 @@
 import numpy as np
 from numpy.typing import NDArray
 
-from ..ej5.tests import test_gauss
-
 Arr = NDArray[np.float64]
 
 
-def egaussp(A: Arr, b: Arr) -> tuple[Arr, Arr]:
+def gaussian_elimination(A: Arr, b: Arr) -> tuple[Arr, Arr]:
     """
     Performs Gaussian elimination with partial pivoting on Ax=b.
-    Overwrites A with U upper triangular and b with y such that Ux=y.
+    Overwrites the upper triangular part of A with U, and b with y such that
+    Ux=y is equivalent to Ax=b.
     Returns modified A and b.
+    O(2n^3/3) complexity.
     """
     n = A.shape[0]
     if A.shape != (n, n) or b.shape != (n,):
@@ -18,9 +18,10 @@ def egaussp(A: Arr, b: Arr) -> tuple[Arr, Arr]:
 
     for i in range(n - 1):
         pivot = np.argmax(np.abs(A[i:, i])) + i
-        if not np.isclose(A[pivot, i], 0):
-            A[[i, pivot]] = A[[pivot, i]]
-            b[[i, pivot]] = b[[pivot, i]]
+        if np.isclose(A[pivot, i], 0):
+            continue
+        A[[i, pivot]] = A[[pivot, i]]
+        b[[i, pivot]] = b[[pivot, i]]
         A[i + 1 :, i] /= A[i, i]
         A[i + 1 :, i + 1 :] -= np.outer(A[i + 1 :, i], A[i, i + 1 :])
         b[i + 1 :] -= A[i + 1 :, i] * b[i]
@@ -29,5 +30,7 @@ def egaussp(A: Arr, b: Arr) -> tuple[Arr, Arr]:
 
 
 if __name__ == "__main__":
-    t = test_gauss(egaussp)
+    from tests.systems.gaussian_elimination import test_gauss
+
+    t = test_gauss(gaussian_elimination)
     print(t)
