@@ -83,11 +83,10 @@ def test_reduced_qr(
         Q, R = qr(_A)
         t += time.perf_counter()
         R = np.triu(R)
-        r = np.linalg.matrix_rank(A)
 
         # Correct shapes
-        assert Q.shape == (m, r)
-        assert R.shape == (r, n)
+        assert Q.shape == (m, n)
+        assert R.shape == (n, n)
 
         # Factorizes A
         np.testing.assert_allclose(Q @ R, A, rtol=rtol)
@@ -95,7 +94,7 @@ def test_reduced_qr(
         # Q has orthonormal columns
         prod = Q.T @ Q
         np.testing.assert_allclose(np.diag(prod), 1, rtol=rtol)
-        prod[np.eye(r, dtype=bool)] = 0
+        prod[np.eye(n, dtype=bool)] = 0
         np.testing.assert_allclose(prod, 0, atol=atol)
 
         # Diagonal of R is nonnegative
