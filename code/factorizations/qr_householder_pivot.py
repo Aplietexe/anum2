@@ -6,7 +6,7 @@ from .householder_reflection import householder_reflection
 Arr = NDArray[np.float64]
 
 
-def qr(A: Arr) -> tuple[Arr, Arr, Arr]:
+def qr(A: Arr, eps: float = 1e-8) -> tuple[Arr, Arr, Arr]:
     """
     Performs QR decomposition on A using Householder reflections and pivoting.
     Overwrites the upper triangular part of A with R.
@@ -21,7 +21,7 @@ def qr(A: Arr) -> tuple[Arr, Arr, Arr]:
 
     for j in range(p):
         l = np.argmax(c[j:]) + j
-        if np.isclose(c[l], 0):
+        if c[l] <= eps:
             break
         A[:, [j, l]] = A[:, [l, j]]
         P[:, [j, l]] = P[:, [l, j]]

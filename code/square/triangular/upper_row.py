@@ -4,7 +4,7 @@ from numpy.typing import NDArray
 Arr = NDArray[np.float64]
 
 
-def solve_upper_triangular(A: Arr, b: Arr) -> Arr:
+def solve_upper_triangular(A: Arr, b: Arr, eps: float = 1e-8) -> Arr:
     """
     Solves Ax = b, where A is an upper triangular invertible matrix.
     Overwrites b with x, does not overwrite A.
@@ -14,7 +14,7 @@ def solve_upper_triangular(A: Arr, b: Arr) -> Arr:
 
     if A.shape != (n, n) or b.shape != (n,):
         raise ValueError("Invalid shapes")
-    if np.any(np.isclose(np.diagonal(A), 0)):
+    if np.any(np.abs(np.diag(A)) <= eps):
         raise ValueError("Matrix is not invertible")
     if not np.allclose(A, np.triu(A)):
         print("Warning: Matrix is not upper triangular")
