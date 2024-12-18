@@ -1,8 +1,8 @@
 import numpy as np
 from numpy.typing import NDArray
 
-from .givens_rotation import givens_2d
 from .hessenberg import hessenberg
+from .qr.givens_rotation import givens_2d
 
 Arr = NDArray[np.float64]
 

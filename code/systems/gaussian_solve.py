@@ -1,7 +1,7 @@
 import numpy as np
 from numpy.typing import NDArray
 
-from .gaussian_pivoting import gaussian_elimination
+from .elimination.gaussian_pivoting import gaussian_elimination
 from .triangular.upper_row import solve_upper_triangular
 
 Arr = NDArray[np.float64]

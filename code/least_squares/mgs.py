@@ -1,8 +1,8 @@
 import numpy as np
 from numpy.typing import NDArray
 
-from ..factorizations.qr_mgs import qr
-from ..square.triangular.upper_row import solve_upper_triangular
+from ..factorizations.qr.qr_mgs import qr
+from ..systems.triangular.upper_row import solve_upper_triangular
 
 Arr = NDArray[np.float64]
 

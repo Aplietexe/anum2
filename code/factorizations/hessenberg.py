@@ -1,7 +1,7 @@
 import numpy as np
 from numpy.typing import NDArray
 
-from .householder_reflection import householder_reflection
+from .qr.householder_reflection import householder_reflection
 
 Arr = NDArray[np.float64]
 

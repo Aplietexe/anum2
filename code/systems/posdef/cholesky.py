@@ -1,7 +1,7 @@
 import numpy as np
 from numpy.typing import NDArray
 
-from ..factorizations.cholesky_interior import cholesky
+from ...factorizations.cholesky_interior import cholesky
 from ..triangular.lower_row import solve_lower_triangular
 from ..triangular.upper_row import solve_upper_triangular
 

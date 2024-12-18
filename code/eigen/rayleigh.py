@@ -1,8 +1,8 @@
 import numpy as np
 from numpy.typing import NDArray
 
-from ..square.gaussian_pivoting import gaussian_elimination
-from ..square.triangular.upper_row import solve_upper_triangular
+from ..systems.elimination.gaussian_pivoting import gaussian_elimination
+from ..systems.triangular.upper_row import solve_upper_triangular
 
 Arr = NDArray[np.float64]
 

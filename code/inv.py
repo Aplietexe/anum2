@@ -2,8 +2,8 @@ import numpy as np
 from numpy.typing import NDArray
 
 from .factorizations.lu_pivoting import lu
-from .square.triangular.lower_row import solve_lower_triangular
-from .square.triangular.upper_row import solve_upper_triangular
+from .systems.triangular.lower_row import solve_lower_triangular
+from .systems.triangular.upper_row import solve_upper_triangular
 
 Arr = NDArray[np.float64]
 

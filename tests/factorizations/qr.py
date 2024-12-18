@@ -54,6 +54,7 @@ def test_qr(
             assert not np.any(np.isclose(np.diag(R), 0))
 
         c += 1
+        print(c)
 
     return t / c
 
