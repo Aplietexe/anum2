@@ -15,15 +15,12 @@ def gmres(A: Arr, b: Arr, x: Arr, eps: float, m: int, m_a: int) -> Arr:
     r = b - A @ x
     sigma = np.linalg.norm(r)
     for _ in range(m):
-        print(sigma)
         if sigma < eps:
             return x
         H, V = arnoldi(A.copy(), r.copy(), m_a)
         v = np.zeros(H.shape[0])
         v[0] = sigma
         alpha, sigma = least_squares(H.copy(), v.copy())
-        # alpha, sigma = np.linalg.lstsq(H, v, rcond=None)[0:2]
-        print(sigma)
         x += V @ alpha
         r = b - A @ x
 
