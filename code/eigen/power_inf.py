@@ -4,10 +4,6 @@ from numpy.typing import NDArray
 Arr = NDArray[np.float64]
 
 
-import time
-from typing import Callable
-
-
 def dominant_eigen(A: Arr, q: Arr, eps: np.float64, maxits: int) -> tuple[Arr, float]:
     """
     Computes the dominant eigenvalue and eigenvector of a matrix using the power

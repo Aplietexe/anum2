@@ -3,9 +3,6 @@ from numpy.typing import NDArray
 
 Arr = NDArray[np.float64]
 
-import time
-from typing import Callable
-
 
 def dominant_eigen(A: Arr, q0: Arr, eps: np.float64, maxits: int) -> tuple[Arr, float]:
     q = A @ q0

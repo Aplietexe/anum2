@@ -37,5 +37,6 @@ def test_posdef_solve(
         else:
             np.testing.assert_allclose(x, true_x, rtol=rtol)
         c += 1
+        print(c)
 
     return t / c

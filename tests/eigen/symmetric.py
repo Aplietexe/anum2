@@ -8,7 +8,7 @@ Arr = NDArray[np.float64]
 
 
 def test_symmetric_diagonalization(
-    diagonalize: Callable[[Arr, np.float64, int], tuple[Arr, Arr]],
+    diagonalize: Callable[[Arr, float, int], tuple[Arr, Arr]],
     maxn: int = 30,
     maxa: float = 1e2,
     rtol: float = 1e-13,
@@ -35,7 +35,7 @@ def test_symmetric_diagonalization(
             continue
         _A = A.copy()
         t -= time.perf_counter()
-        D, Q = diagonalize(_A, np.float64(eps), iters)
+        D, Q = diagonalize(_A, eps, iters)
         t += time.perf_counter()
 
         # Correct shapes

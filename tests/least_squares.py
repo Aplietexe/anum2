@@ -14,6 +14,7 @@ def test_least_squares(
     rtol: float = 1e-6,
     atol: float = 1e-5,
     its: int = 5000,
+    min_norm=False,
 ) -> float:
     """
     Tests a least squares solver. Returns the average time to compute the determinant.
@@ -34,6 +35,11 @@ def test_least_squares(
         t += time.perf_counter()
         np.testing.assert_allclose(A.T @ (A @ x), A.T @ b, rtol=rtol)
         np.testing.assert_allclose(r, np.linalg.norm(A @ x - b), rtol=rtol, atol=atol)
+
+        if min_norm:
+            np_sol = np.linalg.lstsq(A, b, rcond=-1)[0]
+            np.testing.assert_allclose(x, np_sol, rtol=rtol, atol=atol)
+
         c += 1
 
     return t / c

@@ -47,6 +47,7 @@ def test_hessenberg(
         assert np.linalg.norm(H - targ) < tol
 
         c += 1
+        print(c)
 
     return t / c
 
@@ -58,7 +59,7 @@ def test_reduced_hessenberg(
     maxa: float = 1e6,
     rtol: float = 1e-6,
     atol: float = 1e-14,
-    its: int = 1000,
+    its: int = 10000,
 ) -> float:
     """
     Tests Hessenberg factorization. Returns the average time to factorize a matrix.
@@ -96,5 +97,6 @@ def test_reduced_hessenberg(
         assert np.linalg.norm(V.T @ A @ V - H_trunc) < tol
 
         c += 1
+        print(c)
 
     return t / c

@@ -47,7 +47,7 @@ def off(A: Arr) -> tuple[np.float64, int, int]:
     return np.sqrt(2 * off), i, j
 
 
-def diagonalize(A: Arr, eps: np.float64, maxits: int) -> tuple[Arr, Arr]:
+def diagonalize(A: Arr, eps: float, maxits: int) -> tuple[Arr, Arr]:
     """
     Given A n x n symmetric with n >= 2, returns D, Q such that D = Q.T @ A @ Q
     using Jacobi's method.

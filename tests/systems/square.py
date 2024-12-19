@@ -32,5 +32,6 @@ def test_square(
         t += time.perf_counter()
         np.testing.assert_allclose(x, true_x, rtol=rtol)
         c += 1
+        print(c)
 
     return t / c
